@@ -1,3 +1,4 @@
+import { Item } from './../../models/search';
 import { Component, OnInit } from '@angular/core';
 import { SearchService } from '../../services/search.service';
 
@@ -7,14 +8,14 @@ import { SearchService } from '../../services/search.service';
   styleUrls: ['./search-index.component.scss']
 })
 export class SearchIndexComponent {
-  data:any  = [];
+  data:Item[]  = [];
   loading:boolean = false;
   constructor(public searchService: SearchService) {}
 
-  searchItemEvent(searchInput: any) {
+  searchItemEvent(searchInput: string) {
     this.loading = true;
     this.searchService.getUser(searchInput).subscribe((r)=>{
-      this.data = r.items.map((result) => {
+      this.data = r.items.map((result: Item) => {
         result.login = result.login.toUpperCase();
         return result;
       })

@@ -13,7 +13,7 @@ export class SearchResultComponent implements OnInit, OnChanges {
   @Input() loading = false;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  @Input() data: any|Item = [];
+  @Input() data: Item| any = [];
   dataSource: MatTableDataSource<Item>;
   displayedColumns: string[] = ['avatar_url', 'login', 'type'];
 
@@ -22,7 +22,7 @@ export class SearchResultComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     this.dataSource = new MatTableDataSource();
   }
-  ngOnChanges(){ 
+  ngOnChanges(){
     this.dataSource = new MatTableDataSource( this.data);
     this.sortTable();
     this.paginate();
@@ -32,7 +32,7 @@ export class SearchResultComponent implements OnInit, OnChanges {
   }
   sortTable() {
     if(this.sort) {
-      this.sort.sort(({ id: 'login', start: 'asc'}) as MatSortable); 
+      this.sort.sort(({ id: 'login', start: 'asc'}) as MatSortable);
       this.dataSource.sort = this.sort;
       this.dataSource.sortingDataAccessor = (data: any, sortHeaderId: string): string => {
       if (typeof data[sortHeaderId] === 'string') {
